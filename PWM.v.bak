@@ -1,0 +1,67 @@
+module lab7_1 (in,clk,out);
+
+input[3:0] sw0,sw1,sw2,sw3;
+input clk;
+output reg out;
+reg[3:0] c;
+reg[1:0] a; //вспомогательный счётчик для модуляции каждого импульса в always-блоке 
+
+a = 0;
+
+always@(posedge clk)
+begin
+
+//1ый импульс
+if (a==2'b00)
+begin
+	if(c<sw0) 
+		out <=1'b1;
+	else 
+		out <=1'b0;
+	c<=c+4'b0001;
+	if (c==4'b1110) a<=2'b01;
+end
+
+//2ой импульс
+if (a==2'b01)
+begin
+	if(c<sw0) 
+		out <=1'b1;
+	else 
+		out <=1'b0;
+	c<=c+4'b0001;
+	if (c==4'b1110) a<=2'b10;
+end
+
+//3ий импульс
+if (a==2'b10)
+begin
+	if(c<sw0) 
+		out <=1'b1;
+	else 
+		out <=1'b0;
+	c<=c+4'b0001;
+	if (c==4'b1110) a<=2'b11;
+end
+
+//4ый импульс
+if (a==2'b11)
+begin
+	if(c<sw0) 
+		out <=1'b1;
+	else 
+		out <=1'b0;
+	c<=c+4'b0001;
+	if (c==4'b1110) a<=2'b00;
+end
+
+
+end
+
+endmodule
+
+
+
+
+
+
